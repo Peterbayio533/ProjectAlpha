@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>201835982422-ool7l1u9o3g0bq3tef4avrlv0ates8ka.apps.googleusercontent.com</string>
+	<string>201835982422-lfi8dkt9sp4kt58uq2t5fctbvsuipq55.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.201835982422-ool7l1u9o3g0bq3tef4avrlv0ates8ka</string>
+	<string>com.googleusercontent.apps.201835982422-lfi8dkt9sp4kt58uq2t5fctbvsuipq55</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAkpUwZecAKQ_nl3TAuhCjOoH6taPD8kgk</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>PeterB.ProjectAlpha</string>
+	<string>PeterB.ProjectAlphaZero</string>
 	<key>PROJECT_ID</key>
 	<string>projectalpha-7f063</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:201835982422:ios:2392d78eb92aff39</string>
+	<string>1:201835982422:ios:869425b4b887c61b</string>
 	<key>DATABASE_URL</key>
 	<string>https://projectalpha-7f063.firebaseio.com</string>
 </dict>

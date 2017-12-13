@@ -8,5 +8,7 @@ target 'ProjectAlpha' do
   # Pods for ProjectAlpha
   pod 'Firebase/Core'	
   pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+
 
 end

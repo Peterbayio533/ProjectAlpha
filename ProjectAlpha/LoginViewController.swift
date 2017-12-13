@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import GoogleSignIn
+import FBSDKLoginKit
 
-
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate {
 
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -62,8 +63,74 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupFacebookButtons()
+        
+        setupGoogleButtons()
+   
         // Do any additional setup after loading the view.
     }
+    
+    
+    //Google Login Setups Below
+    fileprivate func setupGoogleButtons(){
+        //Google Sign In Button
+        let googleButton = GIDSignInButton()
+        googleButton.frame = CGRect(x: 16, y: 330, width: view.frame.width - 32, height: 50)
+        view.addSubview(googleButton)
+        
+        /*let customButton = UIButton(type: .system)
+        customButton.frame = CGRect(x: 16, y: 330 + 66, width: view.frame.width - 32, height: 50)
+        customButton.backgroundColor = .orange
+        customButton.setTitle("Custom Google Button", for: .normal)
+        customButton.addTarget(self, action: #selector(handleCustomGoogleSign), for: .touchUpInside)
+        view.addSubview(customButton)*/
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+    }
+    
+    @objc func handleCustomGoogleSign() {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    
+    
+     //Facebook Login Setups Below
+    fileprivate func setupFacebookButtons(){
+        let loginButton = FBSDKLoginButton()
+        view.addSubview(loginButton)
+        loginButton.frame = CGRect(x: 16, y: 330 + 66, width: view.frame.width - 32, height: 50)
+        loginButton.delegate = self
+        loginButton.readPermissions = ["email", "public_profile"]
+    }
+    
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Did log out of Facebook")
+    }
+    
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            print(error)
+            return
+        }
+        let accessToken = FBSDKAccessToken.current()
+        guard let accessTokenString = accessToken?.tokenString else { return }
+        let credentials = FIRFacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
+            if error != nil {
+                print("Something went wrong", error ?? "")
+                return
+            }
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
+            self.present(vc!, animated: true, completion: nil)
+            print("Successfully logged in with facebook", user ?? "")
+            
+        })
+        print("Successully logged in with Facebook")
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
